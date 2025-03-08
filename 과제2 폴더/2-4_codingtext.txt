@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> dots) {
+    int answer = 0;
+    
+    double dLean[6] = { 0.0, };
+
+dLean[0] = double(dots[1][1] - dots[0][1]) / double(dots[1][0] - dots[0][0]);
+dLean[1] = double(dots[2][1] - dots[0][1]) / double(dots[2][0] - dots[0][0]);
+dLean[2] = double(dots[3][1] - dots[0][1]) / double(dots[3][0] - dots[0][0]);
+dLean[3] = double(dots[2][1] - dots[1][1]) / double(dots[2][0] - dots[1][0]);
+dLean[4] = double(dots[3][1] - dots[1][1]) / double(dots[3][0] - dots[1][0]);
+dLean[5] = double(dots[3][1] - dots[2][1]) / double(dots[3][0] - dots[2][0]);
+
+if (dLean[0] == dLean[5] || dLean[1] == dLean[4] || dLean[2] == dLean[3])
+	answer = 1;
+    
+    return answer;
+}

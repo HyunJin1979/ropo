@@ -1,0 +1,98 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int a, int b, int c, int d) {
+    int answer = 0;
+    
+int iArrayCount[6] = { 0, };
+
+for (int i = 0; i < 6; i++)
+{
+	if (i == a - 1)
+		iArrayCount[i]++;
+	if (i == b - 1)
+		iArrayCount[i]++;
+	if (i == c - 1)
+		iArrayCount[i]++;
+	if (i == d - 1)
+		iArrayCount[i]++;
+}
+
+int iNonZeroCount = 0;
+for (int i = 0; i < 6; i++)
+{
+	if (iArrayCount[i] > 0)
+		iNonZeroCount++;
+}
+
+if (iNonZeroCount == 4)
+{
+	for (int i = 0; i < 6; i++)
+	{
+		if (iArrayCount[i] > 0)
+		{
+			answer = i + 1;
+			break;
+		}
+	}
+}
+else if (iNonZeroCount == 3)
+{
+	int q = -1;
+	int r = -1;
+	for (int i = 0; i < 6; i++)
+	{
+		if (iArrayCount[i] == 1)
+		{
+			if (q < 0)
+				q = i + 1;
+			else
+				r = i + 1;
+		}
+	}
+	answer = q * r;
+}
+else if (iNonZeroCount == 2)
+{
+	int iMax = -1;
+	int iOne = -1;
+	int q = -1;
+	int r = -1;
+	for (int i = 0; i < 6; i++)
+	{
+		if (iArrayCount[i] == 3)
+			iMax = i;
+		else if (iArrayCount[i] == 1)
+			iOne = i;
+		else if (iArrayCount[i] == 2) 
+		{
+			if (q < 0)
+				q = i + 1;
+			else
+				r = i + 1;
+		}
+	}
+
+	//세개 한개
+	if (iMax > -1)
+		answer = ((iMax + 1) * 10 + (iOne + 1)) * ((iMax + 1) * 10 + (iOne + 1));
+	else// 두개 두개, 
+	{ 
+		answer = (r + q) * abs(r - q);
+	}
+}
+else if (iNonZeroCount == 1)
+{
+	for (int i = 0; i < 6; i++)
+	{
+		if (iArrayCount[i] > 0)
+		{
+			answer = (i + 1) * 1111;
+			break;
+		}
+	}
+}
+    return answer;
+}

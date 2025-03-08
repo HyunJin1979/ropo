@@ -1,0 +1,44 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(vector<vector<int>> board, int k) {
+    int answer = 0;
+    const int iMaxCount = 100;
+
+if (board.size() < 1 || board.size() > 100)
+	answer = -1;
+
+if (answer >= 0)
+{
+	int iCount = 0;
+	for (vector<vector<int>>::iterator itor = board.begin(); itor != board.end(); itor++)
+	{
+		if (itor->size() < 1 || itor->size() > 100)
+		{
+			answer = -1;
+			break;
+		}
+		iCount += itor->size();
+	}
+
+	if (answer >= 0)
+	{
+		if (k < 0 || k > iCount * board.size())
+			answer = -1;
+		else
+		{
+			for (int i = 0; i < board.size(); i++)
+			{
+				for (int j = 0; j < board[i].size(); j++)
+				{
+					if (i + j <= k)
+						answer += board[i][j];
+				}
+			}
+		}
+	}
+}
+    return answer;
+}

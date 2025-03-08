@@ -1,0 +1,22 @@
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int solution(int n, int k) {
+    int answer = 0;
+    const int iLambCost = 12000;
+const int iDrinkCost = 2000;
+const int iServiceCount = 10;
+const int iMaxCount = 1000;
+
+if (n <= 0 || n >= iMaxCount)
+	answer = -1;
+
+if (k < (n / iServiceCount) || k >= iMaxCount)
+	answer = -1;
+
+if (answer > -1)
+	answer = n * iLambCost + k * iDrinkCost - ((n / iServiceCount) * iDrinkCost);
+    return answer;
+}
